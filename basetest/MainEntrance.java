@@ -22,10 +22,10 @@ public class MainEntrance{
 		do{
 			// 生成练习选择运行选择表
 			printLine();
-			for(int i = 0, size = runInterfaceNameList.size(); i < size; i++){
-				System.out.println((i + 1) + "." + runInterfaceList.get(i).getTitle());
+			for(int i = 0, size = runInterfaceList.size(); i < size; i++){
+				System.out.println((i + 1) + "." + runInterfaceList.get(i).getIndexWithTitle(i));
 			}
-			if(runInterfaceNameList.size() <= 0){
+			if(runInterfaceList.size() <= 0){
 				System.out.println("当前还没有创建练习！");
 			}
 			System.out.println("0.退出");
@@ -64,8 +64,10 @@ public class MainEntrance{
 				Object baseRunInstance = baseRun.newInstance();
 				if(baseRunInstance instanceof BaseRunInterface){
 					BaseRunInterface runInterface = (BaseRunInterface)baseRunInstance;
-					// 加入运行接口对象列表
-					runInterfaceList.add(i, runInterface);
+					if(runInterface.isShow()){
+						// 加入运行接口对象列表
+						runInterfaceList.add(i, runInterface);
+					}
 				}
 			}
 		}catch (Exception e){
